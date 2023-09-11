@@ -10,8 +10,8 @@ export default function About() {
         <div className="flex py-4 text-md font-bold gap-12 text-white">
             <div className="flex w-2/3 flex-col py-10 text-md font-bold gap-12 text-white">
                 <div className="flex gap-4 px-20 text-[30px] font-light">
-                    Hey, my name is Emile Ghislain KAMELA. <br />I'm a Telecommunications Engineer with a Specialisation in Mobile Networks & Services. 
-                    <br />For the past 2 years, I've been perfecting my skills as a Backend Developer and Web Integrator.  
+                    Hey, my name is Emile Ghislain KAMELA. <br />I am a Telecommunications Engineer with a Specialisation in Mobile Networks & Services. 
+                    <br />For the past 2 years, I have been perfecting my skills as a Backend Developer and Web Integrator.  
                     <br />I am passionate about the modelling and design of resistant and efficient api.  
                     <br />I also like to listen to music and in my spare time.
                 </div>
