@@ -10,7 +10,7 @@ export default function Body() {
                 <Link href="/">Home</Link>
             </span>
             <span>
-                <a href="/about">About</a>
+                <Link href="/about">About</Link>
             </span>
             <span>Skills</span>
             <span>Experience</span>
