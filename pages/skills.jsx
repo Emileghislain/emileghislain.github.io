@@ -1,6 +1,6 @@
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
-import skills from "./components/skills";
+import skills from "../data/skills";
 import Image from "next/image";
 import { useThemeContext } from './context/theme'
 
