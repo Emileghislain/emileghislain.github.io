@@ -3,7 +3,7 @@ import Image from "next/image"
 import Navbar from "./components/navbar"
 import Footer from "./components/footer"
 import Link from "next/link"
-import { useThemeContext } from './context/theme'
+import { useThemeContext } from '../context/theme'
 import skills from "../data/skills";
 
 export default function Experience() {

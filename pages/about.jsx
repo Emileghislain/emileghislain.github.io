@@ -3,7 +3,7 @@ import Image from "next/image"
 import Navbar from "./components/navbar"
 import Footer from "./components/footer"
 import Link from "next/link"
-import { useThemeContext } from './context/theme'
+import { useThemeContext } from '../context/theme'
 
 export default function About() {
     const [theme, setTheme] = useThemeContext()

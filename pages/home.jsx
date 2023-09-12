@@ -2,7 +2,7 @@
 import Link from "next/link"
 import Navbar from "./components/navbar"
 import Footer from "./components/footer"
-import { useThemeContext } from './context/theme'
+import { useThemeContext } from '../context/theme'
 
 export default function Home() {
     const [theme, setTheme] = useThemeContext()

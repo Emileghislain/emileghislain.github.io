@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { useRouter } from 'next/router'
-import { useThemeContext } from '../context/theme'
+import { useThemeContext } from '../../context/theme'
 import Image from "next/image"
 
 export default function Footer() {

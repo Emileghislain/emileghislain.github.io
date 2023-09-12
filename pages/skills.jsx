@@ -2,7 +2,7 @@ import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import skills from "../data/skills";
 import Image from "next/image";
-import { useThemeContext } from './context/theme'
+import { useThemeContext } from '../context/theme'
 
 export default function Skills(){
     const [theme, setTheme] = useThemeContext()
