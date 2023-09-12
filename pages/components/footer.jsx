@@ -3,22 +3,17 @@ import { useRouter } from 'next/router'
 import { useThemeContext } from '../context/theme'
 import Image from "next/image"
 
-export default function Navbar() {
+export default function Footer() {
     const router = useRouter()
     const [theme, setTheme] = useThemeContext()
 
     const changedTheme =()=>{
         setTheme(!theme)
     }
-
-    console.log(theme)
     
     return (
-        <div className="flex justify-between xs:justify-end xs:pt-1 pt-8">
-            <span className="text-white opacity-0 xs:hidden md:block">
-                change theme
-            </span>
-            <div className="xs:hidden bg-[#1f1f1f] text-sm text-white flex gap-11 uppercase self-center items-center py-2 px-4 rounded-full font-light">
+        <div className="[@media(min-width:640px)]:hidden self-center flex justify-around fixed bottom-2">
+            <div className="bg-[#1f1f1f] text-xs text-white flex gap-2 uppercase self-center items-center py-2 px-4 rounded-full font-light">
                 <span className={router.pathname === '/home' ? "bg-[#3a3a3a] px-5 py-2 rounded-full" : ""}>
                     <Link href="/home">Home</Link>
                 </span>
@@ -35,20 +30,6 @@ export default function Navbar() {
                     <Link href="/contact">Contact</Link>
                 </span>
             </div>
-            {/* <div className="sm:hidden md:hidden lg:hidden self-start">
-                <Image 
-                    width={30}
-                    height={30}
-                    src={theme ? "/images/menu-dark.svg" : "/images/menu-white.svg"}
-                />
-            </div> */}
-            <span className={(theme ? "bg-black " : "bg-white ")+"cursor-pointer xs:p-2 p-4 rounded-full flex"} onClick={changedTheme}>
-                <Image 
-                    width={20}
-                    height={20}
-                    src={theme ? "/images/dark-mode.svg" : "/images/light-theme.svg"}
-                />
-            </span>
         </div>
     )
 }

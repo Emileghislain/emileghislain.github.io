@@ -1,48 +1,47 @@
 
 import Image from "next/image"
 import Navbar from "./components/navbar"
+import Footer from "./components/footer"
 import Link from "next/link"
+import { useThemeContext } from './context/theme'
+import { skills } from "./components/skills";
 
 export default function Experience() {
+    const [theme, setTheme] = useThemeContext()
   return (
-    <div className="bg-black min-h-screen flex flex-col px-12 py-8">
+    <div className={(!theme ?"bg-black text-white ":"bg-white text-black ")+"bg-black min-h-screen flex flex-col px-12 xs:py-2 sm:py-8"}>
         <Navbar />
-        <div className="py-4 flex flex-col text-md font-bold text-start gap-12 capitalize text-white">
-            <div className="w-1/5 text-[#ffc259] rounded-full px-6 py-4 bg-[#1f1c11] text-xs uppercase text-center">Experience</div>
-            <div className="flex justify-between gap-4">
-                <div className="w-1/3 p-4 border rounded-xl">
-                    say hello to the last banking management <br />solution! say hello to the last banking management solution!
-                    say hello to the last banking management <br />solution! say hello to the last banking management solution!
+        <div className="py-4 flex flex-col text-md text-start gap-12 [@media(max-width:639px)]:gap-0">
+            {/* <div className="w-1/5 text-[#ffc259] rounded-full px-6 py-4 bg-[#1f1c11] text-xs text-center">Experience</div> */}
+            {skills.map((el, i)=>(<div key={i} className="flex flex-col py-6 gap-1">
+                <span className="uppercase font-extrabold text-[20px]">
+                    {el.title}
+                </span>
+                <hr className="pb-2"/>
+                <div className="grid [@media(max-width:639px)]:grid-cols-1 grid-cols-4 justify-between pt-2">
+                    {el.content.map((e, index)=>(
+                        <div key={index} className={(!theme ?"hover:bg-[#1f1f1f] ":"hover:bg-[#ece9e9] ")+"flex flex-col p-6 rounded-xl gap-y-2"}>
+                            <Image 
+                                width={50}
+                                height={50}
+                                src={e.image}
+                            />
+                            <span className="font-bold">{e.title}</span>
+                            <span className="font-light">{e.description}</span>
+                        </div>
+                        )
+                    )}
                 </div>
-                <div className="w-1/3 p-4 border rounded-xl">
-                    say hello to the last banking management <br />solution! say hello to the last banking management solution!
-                    say hello to the last banking management <br />solution! say hello to the last banking management solution!
-                </div>
-                <div className="w-1/3 p-4 border rounded-xl">
-                    say hello to the last banking management <br />solution! say hello to the last banking management solution!
-                    say hello to the last banking management <br />solution! say hello to the last banking management solution!
-                </div>
-            </div>
-            <div className="flex justify-between gap-4">
-                <div className="w-1/3 p-4 border rounded-xl">
-                    say hello to the last banking management <br />solution! say hello to the last banking management solution!
-                    say hello to the last banking management <br />solution! say hello to the last banking management solution!
-                </div>
-                <div className="w-1/3 p-4 border rounded-xl">
-                    say hello to the last banking management <br />solution! say hello to the last banking management solution!
-                    say hello to the last banking management <br />solution! say hello to the last banking management solution!
-                </div>
-                <div className="w-1/3 p-4 border rounded-xl">
-                    say hello to the last banking management <br />solution! say hello to the last banking management solution!
-                    say hello to the last banking management <br />solution! say hello to the last banking management solution!
-                </div>
-            </div>
-            <div className="flex justify-center gap-8 text-xs">
-            <Link href={"/skills"}><button className="text-white uppercase animate-[wiggle_5s_ease-in-out_infinite] bg-[#1f1f1f] py-5 px-14 rounded-3xl hover:text-[#1f1f1f] hover:bg-white">
-                    skills
-                </button></Link>
+            </div>))}
+            <div className="flex justify-center gap-8 text-xs [@media(max-width:639px)]:hidden">
+                <Link href={"/skills"}>
+                    <button className="text-white uppercase animate-[wiggle_5s_ease-in-out_infinite] bg-[#1f1f1f] py-5 px-14 rounded-3xl hover:text-[#1f1f1f] hover:bg-white">
+                        skills
+                    </button>
+                </Link>
             </div>
         </div>
+        <Footer />
         {/* <div className="flex text-white my-8 justify-around">
             
             {/* <div className="w-1/2 flex items-center justify-center flex-col gap-8">
