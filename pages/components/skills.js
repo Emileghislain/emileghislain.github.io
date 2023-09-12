@@ -1,5 +1,5 @@
 
-export const skills =[
+const skills =[
     {
         title: 'Frameworks',
         content : [
@@ -51,3 +51,5 @@ export const skills =[
         ]
     }
 ]
+
+export default skills;

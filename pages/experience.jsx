@@ -4,7 +4,7 @@ import Navbar from "./components/navbar"
 import Footer from "./components/footer"
 import Link from "next/link"
 import { useThemeContext } from './context/theme'
-import { skills } from "./components/skills";
+import skills from "./components/skills";
 
 export default function Experience() {
     const [theme, setTheme] = useThemeContext()
