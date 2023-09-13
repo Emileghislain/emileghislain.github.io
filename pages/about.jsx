@@ -15,7 +15,7 @@ export default function About() {
                 <div className="flex [@media(min-width:640px)]:w-2/3 flex-col py-10 text-md font-bold gap-12">
                     <div className="flex gap-4 [@media(min-width:640px)]:px-20 [@media(min-width:640px)]:text-[30px] text-[20px] font-light">
                         Hey, my name is Emile Ghislain KAMELA. <br />I am a Telecommunications Engineer with a Specialisation in Mobile Networks & Services. 
-                        <br />For the past 2 years, I have been perfecting my skills as a Backend Developer and Web Integrator.  
+                        <br />For the past 3 years, I have been perfecting my skills as a Backend Developer and Web Integrator.  
                         <br />I am passionate about the modelling and design of resistant and efficient api.  
                         <br />I also like to listen to music and in my spare time.
                     </div>

@@ -23,9 +23,9 @@ export default function Footer() {
                 <span className={router.pathname === '/skills' ? "bg-[#3a3a3a] px-5 py-2 rounded-full" : ""}>
                     <Link href="/skills">Skills</Link>
                 </span>
-                <span className={router.pathname === '/experience' ? "bg-[#3a3a3a] px-5 py-2 rounded-full" : ""}>
+                {/* <span className={router.pathname === '/experience' ? "bg-[#3a3a3a] px-5 py-2 rounded-full" : ""}>
                     <Link href="/experience">Experience</Link>
-                </span>
+                </span> */}
                 <span className={router.pathname === '/contact' ? "bg-[#3a3a3a] px-5 py-2 rounded-full" : ""}>
                     <Link href="/contact">Contact</Link>
                 </span>

@@ -21,9 +21,11 @@ export default function Contact() {
                 <div className="font-light text-[20px] self-center text-white">I am a backend Developer & web integrator.</div>
                 <div className="flex justify-center gap-8 text-xs">
                     {/* <button className="text-[#1f1f1f] bg-gradient-to-r from-[#fff6cb] to-[#ffc055] py-5 px-14 rounded-3xl hover:text-white">Read More</button> */}
-                    <button className="text-white uppercase animate-[wiggle_5s_ease-in-out_infinite] bg-[#1f1f1f] py-5 px-14 rounded-3xl hover:text-[#1f1f1f] hover:bg-white">
-                        <Link href={"/about"}>About me</Link>
-                    </button>
+                        <Link href={"/about"}>
+                            <button className="text-white uppercase animate-[wiggle_5s_ease-in-out_infinite] bg-[#1f1f1f] py-5 px-14 rounded-3xl hover:text-[#1f1f1f] hover:bg-white">
+                                About me
+                            </button>
+                    </Link>
                 </div>
             </div>
         </div>

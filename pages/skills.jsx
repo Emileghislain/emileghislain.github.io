@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useThemeContext } from '../context/theme'
 
 export default function Skills(){
+    const tab = ['/images/nextjs.svg', '/images/dbs-mysql.svg']
     const [theme, setTheme] = useThemeContext()
     console.log(skills)
     return(
@@ -15,16 +16,16 @@ export default function Skills(){
                     {el.title}
                 </span>
                 <hr className="pb-2"/>
-                <div className="grid [@media(max-width:639px)]:grid-cols-1 grid-cols-4 justify-between pt-2">
+                <div className="grid [@media(max-width:639px)]:grid-cols-2 grid-cols-6 justify-between pt-2">
                     {el.content.map((e, index)=>(
-                        <div key={index} className={(!theme ?"hover:bg-[#1f1f1f] ":"hover:bg-[#ece9e9] ")+"flex flex-col p-6 rounded-xl gap-y-2"}>
+                        <div key={index} className={(!theme ?"hover:bg-[#1f1f1f] ":"hover:bg-[#ece9e9] ")+"flex flex-col [@media(max-width:639px)]:p-4 [@media(max-width:639px)]:items-center p-6 rounded-xl gap-y-2"}>
                             <Image 
                                 width={50}
                                 height={50}
-                                src={e.image}
+                                src={tab.includes(e.image) && !theme ? (e.image).split('.')[0]+"-white.svg" : e.image}
                             />
                             <span className="font-bold">{e.title}</span>
-                            <span className="font-light">{e.description}</span>
+                            {/* <span className="font-light">{e.description}</span> */}
                         </div>
                         )
                     )}
