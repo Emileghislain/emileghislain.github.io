@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useThemeContext } from "../../context/theme";
 import Image from "next/image";
+import Head from "next/head.js";
 
 export default function Navbar() {
   const router = useRouter();
@@ -15,6 +16,10 @@ export default function Navbar() {
 
   return (
     <div className="flex justify-between xs:justify-end xs:pt-1 pt-8">
+      <Head>
+        <title>EG | Portfolio</title>
+        <link rel="icon" href="/images/me.png"></link>
+      </Head>
       <span className="text-white opacity-0 xs:hidden md:block">
         change theme
       </span>
