@@ -12,8 +12,6 @@ export default function Navbar() {
     setTheme(!theme);
   };
 
-  console.log(theme);
-
   return (
     <div className="flex justify-between xs:justify-end xs:pt-1 pt-8">
       <Head>
