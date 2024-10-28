@@ -6,33 +6,33 @@ const skills =[
             { 
                 image : '/images/laravel.svg', 
                 title : 'Laravel', 
-                description : 'NodeJS'
+                description : 'used laravel to work on a wide range of projects, including school management and e-commerce,...'
             },
             { 
                 image : '/images/node.svg', 
                 title : 'Node JS', 
-                description : 'Say hello to the last banking management <br />solution! say hello to the last banking management solution!'
+                description : 'used node to work on a wide range of projects such as a social network, administration dashboard,...'
             },
             { 
                 image : '/images/spring.svg', 
                 title : 'Spring Boot', 
-                description : 'NodeJS'
+                description : 'used spring to work on a wide range of projects such as administration dashboards, ...'
             },
             { 
                 image : '/images/vue.svg', 
                 title : 'Vue JS', 
-                description : 'NodeJS'
+                description : 'used react to work on a wide range of projects such as administration dashboards, ...'
             },
             { 
                 image : '/images/react.svg', 
                 title : 'React JS', 
-                description : 'Say hello to the last banking management <br />solution! say hello to the last banking management solution!'
+                description : 'used react to work on a wide range of projects such as administration dashboards, ...'
             },
             
             { 
                 image : '/images/nextjs.svg', 
                 title : 'Next JS', 
-                description : 'NodeJS'
+                description : 'used react to work on a wide range of projects such as administration dashboards, e-comerce site, ...'
             }
         ],
     },
@@ -42,12 +42,12 @@ const skills =[
             { 
                 image : '/images/mongo.svg', 
                 title : 'MongoDB',  
-                description : 'Say hello to the last banking management <br />solution! say hello to the last banking management solution!'
+                description : 'used mongodb to manage storage for multiple applications.'
             },
             { 
                 image : '/images/dbs-mysql.svg', 
                 title : 'MySql', 
-                description : 'NodeJS'
+                description : 'used mysql to manage storage for multiple applications.'
             }
         ],
     },
@@ -57,12 +57,12 @@ const skills =[
             { 
                 image : '/images/docker.svg', 
                 title : 'Docker', 
-                description : 'NodeJS'
+                // description : 'NodeJS'
             },
             { 
                 image : '/images/nginx.svg', 
                 title : 'Nginx', 
-                description : 'NodeJS'
+                // description : 'NodeJS'
             }
         ]
     }

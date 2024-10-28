@@ -19,7 +19,7 @@ export default function Header() {
         />
         <div className="flex flex-col font-semibold text-sm justify-center">
             <span>Emile Ghislain</span>
-            <span className="font-light text-[15px]">Backend Developer</span>
+            <span className="font-light text-[15px]">Fullstack Developer</span>
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ export default function Home() {
     const [theme, setTheme] = useThemeContext()
     const [message, setMessage] = useState({message: "", message1: "", message2: ""})
     
-    const tab = ["Hey,", "I am Kamela Djounga Emile Ghislain.", "I am a backend Developer & web integrator."]
+    const tab = ["Hey,", "I am Kamela Djounga Emile Ghislain.", "I am a fullstack & web integrator."]
 
     const typing =()=> {
         if(message.message.length < tab[0].length) {
@@ -74,7 +74,7 @@ export default function Home() {
                         />
                         <div className="[@media(max-width:639px)]:hidden">LinkedIn</div>
                     </Link>
-                    <Link target="_blank" href={"https://twitter.com/emile_ghislain"} className={"flex gap-4 hover:text-[#0781d7] [@media(max-width:639px)]:gap-1 [@media(max-width:639px)]:items-center [@media(max-width:639px)]:p-3 [@media(max-width:639px)]:rounded-full [@media(max-width:639px)]:bg-white "+(!theme ? "[@media(max-width:639px)]:bg-white":"[@media(max-width:639px)]:bg-black")}>
+                    <Link target="_blank" href={"https://twitter.com/egkamer"} className={"flex gap-4 hover:text-[#0781d7] [@media(max-width:639px)]:gap-1 [@media(max-width:639px)]:items-center [@media(max-width:639px)]:p-3 [@media(max-width:639px)]:rounded-full [@media(max-width:639px)]:bg-white "+(!theme ? "[@media(max-width:639px)]:bg-white":"[@media(max-width:639px)]:bg-black")}>
                         <Image 
                             width={25}
                             height={25}
