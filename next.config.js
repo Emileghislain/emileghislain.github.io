@@ -9,8 +9,13 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: "",
-  assetPrefix: "",
+  /*
+    Pas de basePath : le site est servi à la racine de emileghislain.github.io,
+    ce qui suppose que le dépôt s'appelle exactement `emileghislain.github.io`.
+    S'il redevenait une page de projet (github.io/<depot>), il faudrait remettre
+    basePath et assetPrefix au nom du dépôt, sinon CSS, JS et images seraient
+    cherchés à la racine du domaine et la page s'afficherait nue.
+  */
 
   // Chaque page devient <dossier>/index.html plutôt que <page>.html : servi
   // correctement par GitHub Pages comme par Apache, sans configuration.
