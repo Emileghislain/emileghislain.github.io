@@ -1,27 +1,309 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+/*
+  Design tokens. Every color is declared once here as a raw custom property,
+  then exposed to Tailwind through `@theme inline` so utilities like
+  `bg-surface` / `text-accent` resolve at runtime and follow the active theme.
+*/
+
+:root,
+[data-theme='dark'] {
+  --surface: #0f1720;
+  --surface-alt: #1a222b;
+  --surface-raised: #202a35;
+  --ink: #ffffff;
+  --muted: #98a2ae;
+  --faint: #3a4551;
+  --accent: #f1553c;
+  --accent-ink: #ffffff;
+  --accent-soft: rgba(241, 85, 60, 0.14);
+  --line: rgba(255, 255, 255, 0.1);
+  --glow: rgba(241, 85, 60, 0.45);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+[data-theme='light'] {
+  --surface: #fbf7f4;
+  --surface-alt: #f0e9e4;
+  --surface-raised: #ffffff;
+  --ink: #14181d;
+  --muted: #5c6672;
+  --faint: #c3b9b2;
+  --accent: #d8402a;
+  --accent-ink: #ffffff;
+  --accent-soft: rgba(216, 64, 42, 0.12);
+  --line: rgba(20, 24, 29, 0.12);
+  --glow: rgba(216, 64, 42, 0.3);
+}
+
+@theme inline {
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
+  --color-surface-raised: var(--surface-raised);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-line: var(--line);
+
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-syne), var(--font-montserrat), ui-sans-serif, sans-serif;
+
+  --animate-breathe: breathe 7s ease-in-out infinite;
+  --animate-drift: drift 9s ease-in-out infinite;
+
+  /* Entrées du hero — jouées au chargement, sans dépendre du JS. */
+  --animate-rise: rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-medallion: medallion 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  /* Rotations lentes autour du portrait. */
+  --animate-orbit: orbit 24s linear infinite;
+  --animate-orbit-slow: orbit 38s linear infinite reverse;
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.85;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
+@keyframes drift {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(0.5rem);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes medallion {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes caret {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--surface);
+  }
+
+  body {
+    background-color: var(--surface);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /*
+    Titres en police display ; un utilitaire `font-sans` reprend la main.
+
+    La chaîne est écrite en toutes lettres plutôt que via var(--font-display) :
+    ce token est déclaré sur :root par @theme, or --font-syne et
+    --font-montserrat sont posés par next/font sur le <div> de _app.js, plus bas
+    dans l'arbre. Sur :root la substitution échoue, --font-display devient
+    invalide, et les titres retombaient silencieusement sur Montserrat.
+  */
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-syne), var(--font-montserrat), ui-sans-serif, sans-serif;
+  }
+
+  /* Anchored sections must clear the fixed header. */
+  section[id] {
+    scroll-margin-top: 5.5rem;
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  /* Scroll reveal: opt-in via <Reveal>, neutralised when motion is reduced. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(1.25rem);
+    transition:
+      opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  /*
+    Ruban de technos défilant vers la gauche. La piste contient deux copies
+    identiques de la liste : à -50% elle se retrouve exactement dans sa
+    position de départ, d'où une boucle sans saut.
+  */
+  .marquee {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+      to right,
       transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+      black 6%,
+      black 94%,
+      transparent
+    );
+    mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 42s linear infinite;
+  }
+
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  /* Carte de code : les lignes s'impriment une à une quand le bloc entre. */
+  .code-line {
+    opacity: 0;
+    transform: translateX(-0.4rem);
+    transition:
+      opacity 0.45s ease-out,
+      transform 0.45s ease-out;
+  }
+
+  .reveal-in .code-line {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Le cadre décalé se met en place pendant que les lignes défilent. */
+  .code-frame {
+    opacity: 0;
+    transform: translate(-0.75rem, 0.75rem);
+    transition:
+      opacity 0.7s ease-out 0.2s,
+      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+  }
+
+  .reveal-in .code-frame {
+    opacity: 1;
+    transform: none;
+  }
+
+  .code-caret {
+    animation: caret 1.05s step-end infinite;
+  }
+
+  /* Barre verticale des titres de section : se déploie quand le bloc entre. */
+  .section-rule {
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+  }
+
+  .reveal-in .section-rule {
+    transform: scaleY(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Sans cela, ces éléments resteraient dans leur état de départ, invisibles. */
+  .section-rule,
+  .code-line,
+  .code-frame {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Le ruban redevient une liste statique, centrée et repliée sur deux lignes. */
+  .marquee {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .marquee-track {
+    animation: none;
+    width: auto;
+    justify-content: center;
+  }
+
+  .marquee-track > [aria-hidden='true'] {
+    display: none;
+  }
+
+  .marquee-track > ul {
+    flex-shrink: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 1rem;
+    padding-right: 0;
+  }
 }
