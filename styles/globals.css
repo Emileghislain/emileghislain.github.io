@@ -118,13 +118,19 @@
   }
 }
 
+@keyframes typing {
+  to {
+    width: var(--type-width);
+  }
+}
+
 @keyframes caret {
   0%,
   100% {
-    opacity: 1;
+    border-right-color: transparent;
   }
   50% {
-    opacity: 0;
+    border-right-color: var(--accent);
   }
 }
 
@@ -213,18 +219,42 @@
     animation-play-state: paused;
   }
 
-  /* Carte de code : les lignes s'impriment une à une quand le bloc entre. */
+  /*
+    Le point en orbite et l'anneau pointillé se figent quand le curseur
+    approche du portrait. Une pause plutôt qu'une inversion : changer
+    `animation-direction` en cours de route ferait sauter la position, le
+    moteur remappant la progression au lieu de l'inverser progressivement.
+  */
+  .medallion:hover .orbit {
+    animation-play-state: paused;
+  }
+
+  /*
+    Carte de code : chaque ligne se frappe caractère par caractère, curseur
+    compris. La police étant à chasse fixe, animer la largeur de 0 à Nch avec
+    `steps(N)` fait apparaître exactement un glyphe par palier.
+
+    L'animation est déclarée en style inline par le composant (valeurs
+    littérales, `steps(var(--n))` n'étant pas fiable partout) et reste en pause tant que
+    <Reveal> n'a pas posé .reveal-in — c'est ce qui la déclenche à l'entrée.
+  */
   .code-line {
-    opacity: 0;
-    transform: translateX(-0.4rem);
-    transition:
-      opacity 0.45s ease-out,
-      transform 0.45s ease-out;
+    display: block;
+    /*
+      content-box est indispensable : en border-box (le défaut posé par
+      Tailwind), les 2 px du curseur seraient pris dans la largeur Nch et
+      rogneraient le dernier caractère de chaque ligne.
+    */
+    box-sizing: content-box;
+    width: 0;
+    overflow: hidden;
+    white-space: pre;
+    border-right: 2px solid transparent;
+    animation-play-state: paused;
   }
 
   .reveal-in .code-line {
-    opacity: 1;
-    transform: none;
+    animation-play-state: running;
   }
 
   /* Le cadre décalé se met en place pendant que les lignes défilent. */
@@ -241,9 +271,6 @@
     transform: none;
   }
 
-  .code-caret {
-    animation: caret 1.05s step-end infinite;
-  }
 
   /* Barre verticale des titres de section : se déploie quand le bloc entre. */
   .section-rule {
@@ -277,10 +304,16 @@
 
   /* Sans cela, ces éléments resteraient dans leur état de départ, invisibles. */
   .section-rule,
-  .code-line,
   .code-frame {
     opacity: 1;
     transform: none;
+  }
+
+  /* Le code s'affiche d'un bloc, sans frappe ni curseur. */
+  .code-line {
+    width: auto !important;
+    animation: none !important;
+    border-right-color: transparent !important;
   }
 
   /* Le ruban redevient une liste statique, centrée et repliée sur deux lignes. */

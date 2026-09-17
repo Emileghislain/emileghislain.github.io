@@ -15,11 +15,53 @@ const toneClass = {
   comment: "text-slate-500",
 };
 
+/** Vitesse de frappe et respiration entre deux lignes. */
+const CHAR_MS = 26;
+const LINE_PAUSE_MS = 190;
+const START_MS = 250;
+const CARET_BLINK_MS = 750;
+
+/**
+ * Découpe les lignes en une partition : chaque ligne connaît sa durée de
+ * frappe et l'instant où elle commence, une fois la précédente terminée.
+ */
+function schedule(lines) {
+  let cursor = START_MS;
+
+  return lines.map((line, index) => {
+    const chars = line.text.length;
+    const duration = Math.max(chars * CHAR_MS, 120);
+    const start = cursor;
+    cursor += duration + LINE_PAUSE_MS;
+
+    const isLast = index === lines.length - 1;
+    // Le curseur clignote pendant la frappe, puis s'efface — sauf sur la
+    // dernière ligne, où il reste comme dans un terminal au repos.
+    const blinks = isLast ? "infinite" : Math.max(Math.round(duration / CARET_BLINK_MS), 1);
+
+    return {
+      ...line,
+      // Propriétés détaillées et non le raccourci `animation` : celui-ci
+      // remettrait `animation-play-state` à `running` et la frappe partirait
+      // au chargement au lieu d'attendre l'entrée dans le champ.
+      style: {
+        // +1px absorbe l'arrondi sous-pixel de `ch` : sans lui, la dernière
+        // ligne reste rognée d'un cheveu.
+        "--type-width": `calc(${chars}ch + 1px)`,
+        animationName: "typing, caret",
+        animationDuration: `${duration}ms, ${CARET_BLINK_MS}ms`,
+        animationTimingFunction: `steps(${chars}), step-end`,
+        animationDelay: `${start}ms, ${start}ms`,
+        animationFillMode: "forwards, none",
+        animationIterationCount: `1, ${blinks}`,
+      },
+    };
+  });
+}
+
 /** Decorative stand-in used until a project has a real screenshot. */
 function CodeCard({ lines }) {
-  // Les lignes s'échelonnent via `transition-delay` : la classe .reveal-in
-  // posée par <Reveal> sur le parent déclenche tout, sans JS supplémentaire.
-  const lineDelay = (index) => 150 + index * 110;
+  const typed = schedule(lines);
 
   return (
     <div className="relative pt-4 pr-4">
@@ -29,20 +71,13 @@ function CodeCard({ lines }) {
       />
       <pre className="relative overflow-x-auto bg-[#0b1118] p-6 font-mono text-[11px] leading-6 md:text-xs">
         <code>
-          {lines.map((line, index) => (
+          {typed.map((line) => (
             <span
               key={line.text}
-              style={{ transitionDelay: `${lineDelay(index)}ms` }}
-              className={`code-line block ${toneClass[line.tone]}`}
+              style={line.style}
+              className={`code-line ${toneClass[line.tone]}`}
             >
               {line.text}
-              {index === lines.length - 1 && (
-                <span
-                  aria-hidden
-                  style={{ animationDelay: `${lineDelay(lines.length)}ms` }}
-                  className="code-caret ml-1.5 inline-block h-3 w-1.75 translate-y-px bg-accent align-middle"
-                />
-              )}
             </span>
           ))}
         </code>

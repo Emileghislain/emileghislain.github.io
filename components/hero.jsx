@@ -1,5 +1,6 @@
 import Image from "next/image";
 import site from "../data/site";
+import { socialIcons } from "./icons";
 import { useAssetPath } from "../lib/asset";
 import { useTranslation } from "../i18n";
 
@@ -64,9 +65,31 @@ export default function Hero() {
               {hasResume ? t.hero.resume : t.hero.work}
             </a>
           </div>
+
+          {/* Les réseaux entrent en dernier, une fois les appels à l'action posés. */}
+          <ul className="animate-rise mt-12 flex items-center justify-center gap-3.5 [animation-delay:520ms] lg:justify-start">
+            <li aria-hidden className="hidden h-px w-10 bg-line lg:block" />
+            {site.socials.map((social) => {
+              const Icon = socialIcons[social.id];
+              return (
+                <li key={social.id}>
+                  <a
+                    href={social.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={social.label}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-muted transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:text-accent"
+                  >
+                    <Icon className="h-4 w-4" />
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
         </div>
 
-        <div className="animate-medallion relative mx-auto aspect-square w-full max-w-64 [animation-delay:200ms] sm:max-w-80 lg:max-w-104">
+        {/* `medallion` sert de point d'ancrage au survol : voir globals.css. */}
+        <div className="medallion animate-medallion relative mx-auto aspect-square w-full max-w-64 [animation-delay:200ms] sm:max-w-80 lg:max-w-104">
           {/* Halo behind the portrait */}
           <div
             aria-hidden
@@ -85,11 +108,11 @@ export default function Hero() {
           {/* Anneau pointillé en rotation lente, à contresens de l'orbite */}
           <div
             aria-hidden
-            className="animate-orbit-slow absolute inset-[9%] rounded-full border border-dashed border-accent/25"
+            className="orbit animate-orbit-slow absolute inset-[9%] rounded-full border border-dashed border-accent/25"
           />
 
           {/* Point qui parcourt l'anneau extérieur */}
-          <div aria-hidden className="animate-orbit absolute inset-[5%]">
+          <div aria-hidden className="orbit animate-orbit absolute inset-[5%]">
             <span className="absolute top-0 left-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent shadow-[0_0_14px_var(--glow)]" />
           </div>
 
