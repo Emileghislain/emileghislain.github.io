@@ -250,19 +250,6 @@ const projects = [
       { text: "// dashboard, radar and official bulletins", tone: "comment" },
     ],
   },
-  {
-    id: "landing-ebm",
-    tags: ["React", "Bootstrap", "React Router"],
-    github: null,
-    demo: null,
-    code: [
-      { text: "src/landing/", tone: "plain" },
-      { text: "  banner.js     → rotating hero carousel", tone: "accent" },
-      { text: "  whatWeDo.js   → services section", tone: "accent" },
-      { text: "  getStart.js   → call to action", tone: "accent" },
-      { text: "// single-page marketing site", tone: "comment" },
-    ],
-  },
 
   /* {
     id: "hackathon-aft",
